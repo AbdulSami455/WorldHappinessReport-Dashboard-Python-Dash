@@ -4,10 +4,23 @@ import dash_bootstrap_components as dbc
 from dash import dcc, html
 
 def create_layout():
+    # Navbar component
+    navbar = dbc.NavbarSimple(
+        brand="World Happiness Report Dashboard",
+        brand_href="#",
+        color="primary",
+        dark=True,
+        sticky="top",
+        children=[
+            dbc.NavItem(dbc.NavLink("Home", href="/")),
+            dbc.NavItem(dbc.NavLink("Page 2", href="/page-2")),
+            dbc.NavItem(dbc.NavLink("About", href="/about")),
+            # Add more NavItems for additional options
+        ]
+    )
+    
     layout = dbc.Container([
-        dbc.Row([
-            dbc.Col(html.H1("World Happiness Report Dashboard", className="display-4"), width=12)
-        ]),
+        navbar,
         dbc.Row([
             dbc.Col(
                 dcc.Dropdown(

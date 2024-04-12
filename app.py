@@ -1,7 +1,11 @@
+# main.py
+
 import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output
-import plotly.express as px
+import dash_bootstrap_components as dbc
+from plotly.subplots import make_subplots
+import plotly.graph_objs as go
 from data import load_happiness_data
 from layout import create_layout
 from callbacks import register_callbacks
@@ -10,7 +14,7 @@ from callbacks import register_callbacks
 happiness_data = load_happiness_data()
 
 # Create Dash app
-app = dash.Dash(__name__)
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
 
 # Set layout
 app.layout = create_layout()
