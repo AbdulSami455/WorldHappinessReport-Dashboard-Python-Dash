@@ -1,6 +1,7 @@
 from dash.dependencies import Output, Input
 import plotly.express as px
-
+from data import load_happiness_data
+happiness_data=load_happiness_data()
 def register_callbacks(app):
     @app.callback(
         Output('happiness-bar-chart', 'figure'),
