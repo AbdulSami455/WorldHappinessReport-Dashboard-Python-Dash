@@ -3,7 +3,7 @@ import dash
 from dash import html, dcc
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
-from layout import create_choropleth_map as map,display_clickable_containers as cont,create_life_expectancy_scatter_from_csv as life, create_freedom_to_country_graph as free,create_gdp_choropleth_map as gdp,create_social_support_line_chart as social,create_corruption_bar_chart as cor,create_generosity_scatter_plot as gen
+from layout import create_choropleth_map as map,display_clickable_container as cont,create_life_expectancy_scatter_from_csv as life, create_freedom_to_country_graph as free,create_gdp_choropleth_map as gdp,create_social_support_line_chart as social,create_corruption_bar_chart as cor,create_generosity_scatter_plot as gen
 
 # Create Dash app
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY], suppress_callback_exceptions=True)
@@ -84,7 +84,7 @@ def display_page(pathname):
     elif pathname =='/generosity':
         return gen()
     else:
-        return cont()
+        return map()
 
 if __name__ == '__main__':
     app.run_server(port=8050, debug=True)
