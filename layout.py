@@ -13,10 +13,10 @@ Top Countries with least and most happiness. Country rankings based on Healthy l
 '''
 
 def create_choropleth_map():
-    # Read the CSV file
+
     df = pd.read_csv('world-happiness-report-2021.csv')
 
-    # Create the choropleth map figure
+
     fig = px.choropleth(
         df,
         locations='Country name',  # Column containing country names
@@ -30,44 +30,39 @@ def create_choropleth_map():
     )
 
     # Create a dcc.Graph component to render the choropleth map
-    graph = dcc.Graph(figure=fig,style={'height': '600px', 'width': '100%'})
+    graph = dcc.Graph(figure=fig,style={'height': '800px', 'width': '100%'})
 
     return graph
-def display_clickable_containers():
-    # Define the addresses and corresponding links
-    addresses = [
-        {'title': 'Address 1', 'link': '/address1'},
-        {'title': 'Address 2', 'link': '/address2'},
-        {'title': 'Address 3', 'link': '/address3'},
-        {'title': 'Address 4', 'link': '/address4'}
-    ]
 
-    # Create a list to hold the clickable containers
+def display_clickable_container():
+    # Define the address and corresponding link
+    address = {'title': 'Address 1', 'link': '/address1'}
+
+    # Create a list to hold the clickable container
     clickable_containers = []
 
-    # Loop through the addresses to create clickable containers
-    for address in addresses:
-        container = dbc.Container(
-            dbc.Card(
-                [
-                    html.Img(src='assets/image_name.png', className='card-img-top', style={'width': '100%'}),
-                    dbc.CardBody(
-                        html.A(
-                            address['title'],
-                            href=address['link'],
-                            style={'text-decoration': 'none', 'color': 'inherit'}
-                        )
+    # Create the clickable container
+    container = dbc.Col(
+        dbc.Card(
+            [
+                html.Img(src='assets/image_name.png', className='card-img-top', style={'width': '100%'}),
+                dbc.CardBody(
+                    html.A(
+                        address['title'],
+                        href=address['link'],
+                        style={'text-decoration': 'none', 'color': 'inherit'}
                     )
-                ],
-                style={'cursor': 'pointer', 'border-radius': '15px', 'box-shadow': '0 4px 8px rgba(0, 0, 0, 0.1)'}
-            ),
-            className='mb-3',
-            style={'width': '1500px', 'height': '120px', 'margin': '5px'}  # Adjust width and height as needed
-        )
-        clickable_containers.append(container)
+                )
+            ],
+            style={'cursor': 'pointer', 'border-radius': '15px', 'box-shadow': '0 4px 8px rgba(0, 0, 0, 0.1)', 'padding': '20px', 'height': '700px'}  # Adjust the height as needed
+        ),
+        width=4,  # Adjust the width to control the number of columns per row
+        className='mb-3',
+    )
+    clickable_containers.append(container)
 
-    # Return the list of clickable containers
-    return clickable_containers
+    # Return the clickable container wrapped in a row
+    return dbc.Row(clickable_containers)
 
 def create_life_expectancy_scatter_from_csv():
     # Read the CSV file
@@ -99,8 +94,8 @@ def create_life_expectancy_scatter_from_csv():
         yaxis=dict(title='Healthy Life Expectancy'),
         showlegend=False,
         template='plotly_dark',
-        height=600,  # Adjust height as needed
-        width=1500,  # Adjust width as needed
+        height=800,  # Adjust height as needed
+        width=1900,  # Adjust width as needed
         margin=dict(l=50, r=50, b=100, t=100),  # Adjust margins
     )
     graph = dcc.Graph(figure=fig,style={'height': '600px', 'width': '100%'})
@@ -157,34 +152,30 @@ def create_gdp_choropleth_map():
     return graph
 
 def create_social_support_line_chart():
-    # Read the CSV file
+
     df = pd.read_csv('world-happiness-report-2021.csv')
 
-    # Sort the DataFrame by 'Social support' column
     df_sorted = df.sort_values(by='Social support', ascending=False)
 
-    # Create a line chart for social support
     fig = go.Figure()
 
-    # Add a line trace for social support
     fig.add_trace(go.Scatter(x=df_sorted['Country name'], y=df_sorted['Social support'], mode='lines', name='Social Support'))
 
-    # Update layout to rotate x-axis labels for better readability
+
     fig.update_layout(title='Social Support by Country', xaxis={'tickangle': 45})
 
-    # Create a dcc.Graph component to render the line chart
     graph = dcc.Graph(figure=fig, style={'height': '600px', 'width': '100%'})
 
     return graph
 
 def create_corruption_bar_chart():
-    # Read the CSV file
+
     df = pd.read_csv('world-happiness-report-2021.csv')
 
-    # Group the data by regional indicator and calculate the average perceptions of corruption
+
     avg_corruption = df.groupby('Regional indicator')['Perceptions of corruption'].mean().reset_index()
 
-    # Create the bar chart
+
     fig = px.bar(avg_corruption, x='Regional indicator', y='Perceptions of corruption',
                  title='Average Perceptions of Corruption by Regional Indicator',
                  labels={'Perceptions of corruption': 'Average Corruption Score', 'Regional indicator': 'Regional Indicator'},
@@ -195,16 +186,14 @@ def create_corruption_bar_chart():
     return graph
 
 def create_generosity_scatter_plot():
-    # Read the CSV file
+
     df = pd.read_csv('world-happiness-report-2021.csv')
 
-    # Create the scatter plot
     fig = px.scatter(df, x='Country name', y='Generosity',
                      title='Generosity Score by Country',
                      labels={'Generosity': 'Generosity Score', 'Country name': 'Country'},
                      template='plotly_dark')
     
-    # Update layout to rotate x-axis labels for better readability
     fig.update_layout(xaxis_tickangle=-45)
 
     graph = dcc.Graph(figure=fig, style={'height': '600px', 'width': '100%'})
