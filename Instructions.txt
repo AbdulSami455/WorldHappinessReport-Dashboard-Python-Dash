@@ -1,0 +1,3 @@
+First install all dependencies present in requirements.txt  by pip install requirements.txt
+
+then go ot main directory of project and run python3 app,py or through vscode 

@@ -120,8 +120,8 @@ def create_freedom_to_country_graph():
     fig.update_layout(
         xaxis_title=None,
         yaxis_title='Freedom Score',
-        height=600,  # Adjust height as needed
-        width=1300,
+        height=1000,  # Adjust height as needed
+        width=2000,
         margin=dict(l=100, r=100, t=100, b=50),  # Adjust margins
     )
     graph = dcc.Graph(figure=fig,style={'height': '600px', 'width': '150%'})
