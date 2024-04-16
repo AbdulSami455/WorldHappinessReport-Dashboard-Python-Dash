@@ -69,8 +69,6 @@ app.layout = html.Div([
 def display_page(pathname):
     if pathname == '/happinessscore':
         return map()
-    elif pathname == '/seller':
-        return map()
     elif pathname =='/lifeexpectancy':
         return life()
     elif pathname == '/freedom':
